@@ -48,7 +48,14 @@ public class CarchargeController {
     @Resource
     private IOwnerService ownerService;
 
-
+    /**
+     * 管理员停车费查询
+     * @param carcharge
+     * @param numbers
+     * @param page
+     * @param limit
+     * @return
+     */
     @RequestMapping("/queryCarchargeAll")
     public JsonObject queryCarchargeAll(Carcharge carcharge, String numbers,
                                         @RequestParam(defaultValue = "1") Integer page,
@@ -64,7 +71,14 @@ public class CarchargeController {
 
     }
 
-
+    /**
+     * 用户停车费查询
+     * @param carcharge
+     * @param request
+     * @param page
+     * @param limit
+     * @return
+     */
     @RequestMapping("/queryCarchargeAll2")
     public JsonObject queryCarchargeAll2(Carcharge carcharge, HttpServletRequest request,
                                         @RequestParam(defaultValue = "1") Integer page,

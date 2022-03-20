@@ -24,6 +24,7 @@ public class LoginController {
     public Map loginIn(Userinfo userinfo, HttpServletRequest request){
         Map map=new HashMap();
         HttpSession session=request.getSession();
+
         if(session==null){
             map.put("code",404);
             map.put("msg","登录超时了");

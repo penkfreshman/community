@@ -8,7 +8,7 @@ import com.pk.model.Repairtype;
  *  Mapper 接口
  * </p>
  *
- * @author kappy
+ * @author pk
  * @since 2020-10-28
  */
 public interface RepairtypeMapper extends BaseMapper<Repairtype> {

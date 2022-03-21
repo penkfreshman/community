@@ -45,7 +45,7 @@
         <select id="queryCountByOwnIdAndTime" resultType="java.util.Date" parameterType="Integer">
             SELECT clock_in_time
             FROM clockin
-            LEFT JOIN OWNER ON clockin.owner_id = owner.id
+            LEFT JOIN owner ON clockin.owner_id = owner.id
             LEFT JOIN building ON clockin.building_id = building.id
             LEFT JOIN house ON clockin.house_id = house.id
             WHERE clockin.owner_id=#{ownId}

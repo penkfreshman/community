@@ -10,7 +10,7 @@ import com.pk.model.Records;
  *  服务类
  * </p>
  *
- * @author kappy
+ * @author pk
  * @since 2020-10-28
  */
 public interface IRecordsService extends IService<Records>{

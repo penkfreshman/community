@@ -10,7 +10,7 @@ import com.pk.model.Owner;
  *  服务类
  * </p>
  *
- * @author kappy
+ * @author pk
  * @since 2020-11-08
  */
 public interface IOwnerService extends IService<Owner> {

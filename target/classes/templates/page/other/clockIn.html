@@ -18,9 +18,9 @@
                 url:"clockin/clockInAdd?username="+username,
                 success:function (result) {
                     if(result.code==200) {
-                        /*var btn = document.getElementById("btn");
+                        var btn = document.getElementById("btn");
                         btn.innerText = "已打卡";
-                        btn.style.backgroundColor  = '#969696';*/
+                        btn.style.backgroundColor  = '#969696';
                         layer.msg('打卡成功', {
                             iocn: 6,
                             time: 1000

@@ -10,7 +10,7 @@
         records rec
     LEFT JOIN property_type type ON type.id = rec.type_id
     LEFT JOIN house hou ON hou.id = rec.house_id
-    LEFT JOIN OWNER own ON own.house_id = hou.id
+    LEFT JOIN owner own ON own.house_id = hou.id
    <where>
        <if test="numbers!=null and numbers!=''">
             and numbers like '%${numbers}%'

@@ -11,7 +11,7 @@ import java.util.List;
  *  服务类
  * </p>
  *
- * @author kappy
+ * @author pk
  * @since 2020-11-08
  */
 public interface IPropertyTypeService extends IService<PropertyType> {

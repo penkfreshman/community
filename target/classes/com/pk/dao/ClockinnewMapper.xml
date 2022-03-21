@@ -46,7 +46,7 @@
         <select id="queryCountByOwnId" resultType="java.util.Date" parameterType="Integer">
             SELECT report_date
             FROM clockinnew cloc
-            LEFT JOIN OWNER ON cloc.owner_id = owner.id
+            LEFT JOIN owner ON cloc.owner_id = owner.id
             WHERE cloc.owner_id=#{ownerId}
             ORDER BY report_date DESC
             LIMIT 1

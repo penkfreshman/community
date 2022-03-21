@@ -35,7 +35,7 @@
         rep.*, own.username,
         type. NAME
         FROM
-        REPAIR rep
+        repair rep
         LEFT JOIN repairtype type ON type.id = rep.com_id
         LEFT JOIN `owner` own ON own.id = rep.owner_id
 

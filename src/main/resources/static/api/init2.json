@@ -38,6 +38,27 @@
           "href": "page/other/RepairIndex2.html",
           "icon": "fa fa-adn",
           "target": "_self"
+        },
+        {
+          "title": "社区疫情",
+          "icon": "fa fa-lemon-o",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "疫情打卡",
+              "href": "page/other/clockIn.html",
+              "icon": "fa fa-area-chart",
+              "target": "_self"
+            },
+            {
+              "title": "疫情报备",
+              "href": "page/other/clockInNew.html",
+              "icon": "fa fa-repeat",
+              "target": "_self"
+            }
+
+          ]
         }
       ]
     }

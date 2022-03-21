@@ -10,7 +10,7 @@ import com.pk.model.Building;
  *  服务类
  * </p>
  *
- * @author kappy
+ * @author pk
  * @since 2020-11-08
  */
 public interface IBuildingService extends IService<Building> {

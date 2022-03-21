@@ -31,7 +31,7 @@
             own.tel
         FROM
             parking park
-        LEFT JOIN OWNER own ON own.id = park.owner_id
+        LEFT JOIN owner own ON own.id = park.owner_id
         <where>
             <if test="numbers!=null and numbers!=''">
                  and numbers like '%${numbers}%'

@@ -31,7 +31,7 @@ import java.util.List;
  * </p>
  *
  * @author pk
- * @since 2021-04-27
+ * @since 2022-03-1
  */
 @Api(tags = {""})
 @RestController
@@ -39,6 +39,7 @@ import java.util.List;
 public class ClockinController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
+    private String TAG="test";
 
     @Resource
     private IClockinService clockinService;
@@ -64,7 +65,7 @@ public class ClockinController {
     @ApiOperation(value = "新增")
     @RequestMapping("/clockInAdd")
     public R add(String username){
-
+        log.debug(TAG,"调用");
         /**
          * 打卡前先判断这个用户在当天是否已经打卡，若已打卡提示您已经打卡
          * 通过两个参数ownerId+clockTime判断是否已经打卡，就是业主名+打卡时间

@@ -1,3 +1,4 @@
+
 <div class="layuimini-main">
 
     <div class="layui-form layuimini-form">
@@ -73,6 +74,7 @@
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var datas=data.field;//form单中的数据信息
+            var day=getIntervalMonth(new Date(datas.startDate),new Date(datas.endDate));
             addOrUpdateSubmit($,'carcharge/initData',datas);
             return false;
         });

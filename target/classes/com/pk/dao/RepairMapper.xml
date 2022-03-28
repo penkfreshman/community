@@ -40,10 +40,10 @@
         LEFT JOIN `owner` own ON own.id = rep.owner_id
 
         <where>
-            <if test="comId!=null">
+            <if test="comId!=null and comId!=''">
                 and com_id=#{comId}
             </if>
-            <if test="status!=null ">
+            <if test="status==0  or status ==1 ">
                 and rep.status=#{status}
             </if>
             <if test="ownerId!=null ">

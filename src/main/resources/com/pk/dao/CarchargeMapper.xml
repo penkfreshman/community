@@ -47,7 +47,7 @@
                 </if>
 
             </if>
-            <if test="status!=null and status!=''">
+            <if test="status ==0 or status==1">
                 and car.status=#{status}
             </if>
 

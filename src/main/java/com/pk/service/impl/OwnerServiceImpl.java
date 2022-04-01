@@ -74,6 +74,11 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     }
 
     @Override
+    public Owner queryOwnerByIdCard(String identity) {
+        return ownerDao.queryOwnerByIdCard(identity);
+    }
+
+    @Override
     public Owner queryOwnerById(long parseLong) {
         return ownerDao.queryOwnerById(parseLong);
     }

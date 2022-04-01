@@ -70,9 +70,8 @@ public class PropertyInfoController {
                                        @RequestParam(defaultValue = "1") Integer page,
                                         @RequestParam(defaultValue = "15") Integer limit){
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
-        //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+         String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         Integer houId= owner.getHouseId();
         propertyInfo.setHouseId(houId);
         PageInfo<PropertyInfo> pageInfo=propertyInfoService.findPropertyInfoAll(page,limit,

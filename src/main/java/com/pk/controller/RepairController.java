@@ -61,9 +61,8 @@ public class RepairController {
 
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
-        //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+         String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         repair.setOwnerId(owner.getId());
         PageInfo<Repair> pageInfo=repairService.findRepairAll(page,limit,repair);
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());

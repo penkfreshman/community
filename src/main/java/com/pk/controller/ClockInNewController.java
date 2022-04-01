@@ -68,10 +68,8 @@ public class ClockInNewController {
                                       ){
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
-
-        //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+         String identity=userinfo.getIdentity().trim();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         clockinnew.setOwnerId(owner.getId());
         PageInfo<Clockinnew> pageInfo= clockinnewService.queryClockInAll(pageNum,pageSize,clockinnew);
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
@@ -81,10 +79,8 @@ public class ClockInNewController {
     public  List<Owner> queryOwner(HttpServletRequest request,Clockinnew clockinnew){
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
-
-        //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+         String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         List<Owner> list = new ArrayList<>();
         list.add(owner);
         return list;
@@ -105,7 +101,6 @@ public class ClockInNewController {
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
         String username=userinfo.getUsername();
-
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String todayDate = df.format(new Date());//今天的日期
         //System.out.println(todayDate);

@@ -2,6 +2,8 @@ package com.pk.controller;
 
 import com.pk.model.Userinfo;
 import com.pk.service.IUserinfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ public class LoginController {
     @Autowired
     private IUserinfoService userinfoService;
 
+    private Logger log = LoggerFactory.getLogger(getClass());
+
     @RequestMapping("/loginIn")
     @ResponseBody
     public Map loginIn(Userinfo userinfo, HttpServletRequest request){
@@ -32,6 +36,8 @@ public class LoginController {
         }
 
         Userinfo user=userinfoService.queryUserByNameAndPwd(userinfo);
+        log.error("th idcard is:"+ user.getIdentity());
+        log.error("th name is:"+ user.getUsername());
         if(user==null){
             map.put("code",404);
             map.put("msg","用户名或者密码错误");

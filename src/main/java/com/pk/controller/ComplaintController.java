@@ -60,9 +60,8 @@ public class ComplaintController {
                                         @RequestParam(defaultValue = "15") Integer limit){
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
-        //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+         String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         complaint.setOwnerId(owner.getId());
         PageInfo<Complaint> pageInfo=complaintService.findComplaintAll(page,limit,complaint);
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
@@ -77,9 +76,8 @@ public class ComplaintController {
     {
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
-        //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+         String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         complaint.setOwnerId(owner.getId());
         complaint.setStatus(0);
         complaint.setComDate(new Date());

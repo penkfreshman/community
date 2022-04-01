@@ -43,7 +43,9 @@
         <where>
             <if test="parking!=null">
                 <if test="parking.numbers!=null and parking.numbers!=''">
-                    and park.numbers =#{parking.numbers}
+                    and park.numbers
+                            =#{parking.numbers}
+
                 </if>
 
             </if>

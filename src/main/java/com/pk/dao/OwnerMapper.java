@@ -26,6 +26,8 @@ public interface OwnerMapper extends BaseMapper<Owner> {
      */
     Owner queryOwnerByName(@Param("username") String username);
 
+    Owner queryOwnerByIdCard(@Param("identity") String identity);
+
     void deleteOwnerUserByUserName(@Param("username2") String username);
 
     Owner queryOwnerById(@Param("id") long parseLong);

@@ -28,6 +28,13 @@ public interface IOwnerService extends IService<Owner> {
     Owner queryOwnerByName(String username);
 
     /**
+     * 通过id身份证查询
+     * @param identity
+     * @return
+     */
+    Owner queryOwnerByIdCard(String identity);
+
+    /**
      * 添加
      *
      * @param owner 

@@ -9,18 +9,19 @@
                     <result column="password" property="password"/>
                     <result column="type" property="type"/>
                     <result column="remarks" property="remarks"/>
+                    <result column="identity" property="identity"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-            id, username, password, type, remarks
+            id, username, password, type, remarks,identity
         </sql>
 
 
     <select id="queryUserinfoAll" parameterType="com.pk.model.Userinfo" resultType="com.pk.model.Userinfo">
            select * from userinfo
            <where>
-               <if test="type!=null">
+               <if test="type==0 or type==1">
                  and  type=#{type}
                </if>
            </where>
@@ -28,8 +29,12 @@
 
     <select id="queryUserByNameAndPwd" resultType="com.pk.model.Userinfo"
      parameterType="com.pk.model.Userinfo">
-        select * from userinfo u  where username=#{username} and u.password=#{password}
-        and  type=#{type}
+        select
+              t.*
+            from test t
+        LEFT JOIN owner own ON t.identity = own.identity
+        where t.username=#{username} and t.password=#{password}
+        and  t.type=#{type}
     </select>
 
     <delete id="deleteUserByUsername" parameterType="String">

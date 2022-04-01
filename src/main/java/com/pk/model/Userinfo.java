@@ -36,5 +36,5 @@ public class Userinfo implements Serializable {
 
     private String remarks;
 
-
+    private String identity;
 }

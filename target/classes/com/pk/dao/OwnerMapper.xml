@@ -50,6 +50,10 @@
         select * from owner where username=#{username}
     </select>
 
+    <select id="queryOwnerByIdCard" parameterType="string" resultType="com.pk.model.Owner">
+        select * from owner where identity =#{identity}
+    </select>
+
     <select id="queryOwnerById" parameterType="long" resultType="com.pk.model.Owner">
         select * from owner where id=#{id}
     </select>

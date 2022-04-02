@@ -13,6 +13,7 @@
             <div class="layui-input-block">
                 <select name="type" lay-verify="required" >
                     <option value="1">管理员</option>
+                    <option value="0">用户</option>
                 </select>
             </div>
         </div>
@@ -22,6 +23,13 @@
             <label class="layui-form-label required">密码</label>
             <div class="layui-input-block">
                 <input type="password" name="password" lay-verify="required"   class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">身份证号码</label>
+            <div class="layui-input-block">
+                <input type="text" name="identity" lay-verify="required"   class="layui-input">
             </div>
         </div>
 

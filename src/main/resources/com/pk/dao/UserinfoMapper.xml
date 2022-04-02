@@ -30,14 +30,15 @@
     <select id="queryUserByNameAndPwd" resultType="com.pk.model.Userinfo"
      parameterType="com.pk.model.Userinfo">
         select
-              t.*
-            from test t
-        LEFT JOIN owner own ON t.identity = own.identity
-        where t.username=#{username} and t.password=#{password}
-        and  t.type=#{type}
+              userinfo.*
+            from userifo user
+        LEFT JOIN owner own ON userinfo.identity = own.identity
+        where user.username=#{username} and user.password=#{password}
+        and  user.type=#{type}
     </select>
 
     <delete id="deleteUserByUsername" parameterType="String">
-        delete from userinfo where username=#{username2}
+        delete from userinfo user where username=#{username2}
     </delete>
+
 </mapper>

@@ -60,7 +60,9 @@ public class CarchargeController {
     public JsonObject queryCarchargeAll(Carcharge carcharge, String numbers,
                                         @RequestParam(defaultValue = "1") Integer page,
                                         @RequestParam(defaultValue = "15") Integer limit){
+
         if(numbers!=null){
+            log.error("the nun is :"+numbers.trim());
            Parking parking=new Parking();
            parking.setNumbers(numbers);
            carcharge.setParking(parking);

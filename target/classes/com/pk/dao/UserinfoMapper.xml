@@ -30,9 +30,9 @@
     <select id="queryUserByNameAndPwd" resultType="com.pk.model.Userinfo"
      parameterType="com.pk.model.Userinfo">
         select
-              userinfo.*
-            from userifo user
-        LEFT JOIN owner own ON userinfo.identity = own.identity
+            user.*
+            from userinfo user
+        LEFT JOIN owner own ON user.identity = own.identity
         where user.username=#{username} and user.password=#{password}
         and  user.type=#{type}
     </select>

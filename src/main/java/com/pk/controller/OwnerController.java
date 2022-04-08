@@ -67,6 +67,7 @@ public class OwnerController {
         user.setPassword("123456");//默认密码
         user.setRemarks(owner.getRemarks());
         user.setType(0);
+        user.setIdentity(owner.getIdentity());
         user.setUsername(owner.getUsername());
         userinfoService.add(user);
 

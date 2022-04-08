@@ -134,7 +134,11 @@ public class RecordsController {
       @Transactional(rollbackFor = {RuntimeException.class,Error.class})
       public R deleteByIds(String ids){
            //把字符串转list集合
+
            List<String> list=Arrays.asList(ids.split(","));
+          for(String id : list){
+              log.error(id+"   ");
+          }
            for(String id : list){
                Long idLong=Long.parseLong(id);
                //根据id获取对应的记录信息获取登记时间以及房子id
@@ -146,8 +150,10 @@ public class RecordsController {
                //删除登记表记录信息
                recordsService.delete(idLong);
                //物业收费信息表相关信息
-               propertyInfoService.deleteInfoByHouIdAndTime(houId ,onTime);
+
+//               propertyInfoService.deleteInfoByHouIdAndTime(houId ,onTime);
            }
+
           return R.ok();
       }
 

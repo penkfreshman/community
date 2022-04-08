@@ -40,7 +40,6 @@ public class PropertyInfoServiceImpl extends ServiceImpl<PropertyInfoMapper, Pro
 
     @Override
     public void deleteInfoByHouIdAndTime(Integer houId, Date endTime) {
-
          SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
          String dateString = formatter.format(endTime);
          dateString=dateString.substring(0,9);
@@ -73,5 +72,15 @@ public class PropertyInfoServiceImpl extends ServiceImpl<PropertyInfoMapper, Pro
     @Override
     public PropertyInfo findById(Long id){
         return  baseMapper.selectById(id);
+    }
+
+    @Override
+    public String queryInfoByHouIdAndTime(Integer houId, Date endDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(endDate);
+        dateString=dateString.substring(0,10);
+       if(propertyInfoDao.queryByHouIdAndTime(houId,dateString)==0)
+           return null;
+       return propertyInfoDao.queryByHouIdAndTime(houId,dateString)+"";
     }
 }

@@ -25,6 +25,10 @@
         delete from property_info where house_id=#{houId} and end_date=#{endDate}
     </delete>
 
+    <select id="queryByHouIdAndTime" parameterType="String">
+        select info.id from property_info info where house_id=#{houId} and end_date=#{endDate}
+    </select>
+
     <resultMap id="queryListAllMap" type="com.pk.model.PropertyInfo" extends="BaseResultMap">
         <association property="owner" javaType="com.pk.model.Owner">
             <id column="id" property="id"></id>

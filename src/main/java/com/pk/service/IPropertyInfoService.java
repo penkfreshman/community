@@ -27,7 +27,7 @@ public interface IPropertyInfoService extends IService<PropertyInfo> {
      */
     void deleteInfoByHouIdAndTime(@Param("houId") Integer houId,@Param("endDate") Date endDate);
 
-
+    String queryInfoByHouIdAndTime(@Param("houId") Integer houId,@Param("endDate") Date endDate);
     /**
      * 查询分页数据
      *

@@ -23,5 +23,6 @@ public interface PropertyInfoMapper extends BaseMapper<PropertyInfo> {
      */
     void deleteByHouIdAndTime( @Param("houId") Integer houId, @Param("endDate") String onTime);
 
+    int queryByHouIdAndTime( @Param("houId") Integer houId, @Param("endDate") String onTime);
     List<PropertyInfo> queryListAll(PropertyInfo propertyInfo);
 }

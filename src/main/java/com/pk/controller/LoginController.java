@@ -36,8 +36,7 @@ public class LoginController {
         }
 
         Userinfo user=userinfoService.queryUserByNameAndPwd(userinfo);
-        log.error("th idcard is:"+ user.getIdentity());
-        log.error("th name is:"+ user.getUsername());
+       
         if(user==null){
             map.put("code",404);
             map.put("msg","用户名或者密码错误");

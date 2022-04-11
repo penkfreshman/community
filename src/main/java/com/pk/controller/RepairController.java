@@ -97,7 +97,8 @@ public class RepairController {
         String username=userinfo.getUsername();
 
         //根据username获取登录账号得业主id
-        Owner owner=ownerService.queryOwnerByName(username);
+        String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
         repair.setOwnerId(owner.getId());
         repair.setStatus(0);
         repair.setComDate(new Date());

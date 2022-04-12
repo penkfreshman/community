@@ -1,6 +1,8 @@
 package com.pk.controller;
 
+import com.pk.model.Owner;
 import com.pk.model.Userinfo;
+import com.pk.service.IOwnerService;
 import com.pk.service.IUserinfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +23,9 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private IUserinfoService userinfoService;
+
+    @Resource
+    private IOwnerService ownerService;
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -36,7 +42,9 @@ public class LoginController {
         }
 
         Userinfo user=userinfoService.queryUserByNameAndPwd(userinfo);
-       
+        String identity=user.getIdentity();
+
+
         if(user==null){
             map.put("code",404);
             map.put("msg","用户名或者密码错误");
@@ -45,7 +53,14 @@ public class LoginController {
             session.setAttribute("user",user);
             map.put("code",200);
             map.put("user",user);
-            map.put("username",user.getUsername());
+
+            log.error(identity.trim());
+            if(identity.trim().equals("无")) {
+                map.put("username", user.getUsername());
+            }else {
+                Owner owner=ownerService.queryOwnerByIdCard(identity);
+                map.put("username", owner.getUsername());
+            }
             return map;
         }
 

@@ -10,6 +10,8 @@ import com.pk.dao.RepairMapper;
 import com.pk.model.Repair;
 import com.pk.model.Tongji;
 import com.pk.service.IRepairService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,7 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
         PageInfo<Repair> pageInfo=new PageInfo(list);
         return pageInfo;
     }
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     @Override
     public List<Repair> queryList() {
@@ -72,6 +75,7 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
 
     @Override
     public List<Tongji> queryTongji() {
+
         return repairDao.queryTongji();
     }
 }

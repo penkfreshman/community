@@ -54,4 +54,6 @@ public class RepairtypeServiceImpl extends ServiceImpl<RepairtypeMapper, Repairt
     public Repairtype findById(Long id){
         return  baseMapper.selectById(id);
     }
+
+
 }

@@ -48,6 +48,8 @@
                 {field: 'numbers', width: 80, title: '房号'},
                 {field: 'area', width: 80, title: '面积'},
                 {field: 'intoDate', width: 150, title: '入住时间'},
+                {field: 'build', width: 100, title: '所属楼栋'},
+                {field: 'unit', width: 100, title: '所属单元'},
                 {field: 'status', width: 80, title: '状态',
                  templet:function(res){
                     if(res.status=='1'){
@@ -57,7 +59,9 @@
                     }
                  }},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
-            ]],
+            ]],  text: { //自定义文本，如空数据时的异常提示等。
+                none: '暂无数据！'
+            },
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
             page: true,
@@ -159,6 +163,7 @@
                 "status":data.status,
                 "intoDate":data.intoDate,
                 "buildingId":data.buildingId,
+                "building":data.building.numbers,
                 "area":data.area,
                 "typeIds":data.buildingId,
                 "remarks":data.remarks

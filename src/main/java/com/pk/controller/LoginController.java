@@ -42,7 +42,12 @@ public class LoginController {
         }
 
         Userinfo user=userinfoService.queryUserByNameAndPwd(userinfo);
+        if(user.getIdentity().trim().equals("")||user.getIdentity()==null) {
+            user.setIdentity("无");
+            userinfoService.updateData(user);
+        }
         String identity=user.getIdentity();
+
 
 
         if(user==null){

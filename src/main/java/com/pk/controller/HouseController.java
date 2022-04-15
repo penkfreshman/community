@@ -2,7 +2,9 @@ package com.pk.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
+import com.pk.model.Building;
 import com.pk.model.House;
+import com.pk.service.IBuildingService;
 import com.pk.service.IHouseService;
 import com.pk.util.JsonObject;
 import com.pk.util.R;
@@ -36,11 +38,25 @@ public class HouseController {
     @Resource
     private IHouseService houseService;
 
+    @Resource
+    private IBuildingService buildingService;
+
     @RequestMapping("/houseAll")
     public JsonObject queryHouseAll(String numbers,
                                   @RequestParam(defaultValue = "1")  Integer page,
                                     @RequestParam(defaultValue = "15")  Integer limit){
         PageInfo<House> pageInfo=houseService.findHouseAll(page,limit,numbers);
+        List<House> list=pageInfo.getList();
+        for (House list1:list){
+            Building buiding= buildingService.queryBuildById(list1.getBuildingId());
+            list1.setBuild(buiding.getNumbers());
+            list1.setUnit(buiding.getUints());
+
+            log.error(list1.getBuild()!=null?"true":"flase");
+            log.error((list1.getBuild()!=null|| list1.getBuild().trim()!="")?list1.getBuild():"无");
+            log.error((list1.getUnit()!=null|| list1.getUnit().trim()!="")?list1.getUnit():"无");
+        }
+        pageInfo.setList(list);
         return  new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
     }
 

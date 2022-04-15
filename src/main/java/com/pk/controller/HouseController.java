@@ -49,11 +49,11 @@ public class HouseController {
         List<House> list=pageInfo.getList();
         for (House list1:list){
             Building buiding= buildingService.queryBuildById(list1.getBuildingId());
-            list1.setBuild(buiding.getNumbers());
+            list1.setBuilds(buiding.getNumbers());
             list1.setUnit(buiding.getUints());
 
-            log.error(list1.getBuild()!=null?"true":"flase");
-            log.error((list1.getBuild()!=null|| list1.getBuild().trim()!="")?list1.getBuild():"无");
+            log.error("-------------");
+            log.error((list1.getBuilds()!=null|| list1.getBuilds().trim()!="")?list1.getBuilds():"无");
             log.error((list1.getUnit()!=null|| list1.getUnit().trim()!="")?list1.getUnit():"无");
         }
         pageInfo.setList(list);

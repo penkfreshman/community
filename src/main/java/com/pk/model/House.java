@@ -47,6 +47,6 @@ public class House implements Serializable {
 
     private String unit;
 
-    private String build;
+    private String builds;
 
 }

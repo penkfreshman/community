@@ -42,12 +42,6 @@ public class LoginController {
         }
 
         Userinfo user=userinfoService.queryUserByNameAndPwd(userinfo);
-        if(user.getIdentity().trim().equals("")||user.getIdentity()==null) {
-            user.setIdentity("无");
-            userinfoService.updateData(user);
-        }
-        String identity=user.getIdentity();
-
 
 
         if(user==null){
@@ -55,6 +49,13 @@ public class LoginController {
             map.put("msg","用户名或者密码错误");
             return map;
         }else{
+            if(user.getIdentity().trim().equals("")||user.getIdentity()==null) {
+                user.setIdentity("无");
+                userinfoService.updateData(user);
+            }
+            String identity=user.getIdentity();
+
+
             session.setAttribute("user",user);
             map.put("code",200);
             map.put("user",user);

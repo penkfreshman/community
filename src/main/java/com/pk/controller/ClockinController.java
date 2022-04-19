@@ -80,15 +80,19 @@ public class ClockinController {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String todayDate = df.format(new Date());//今天的日期
         System.out.println(todayDate);
+        log.error(todayDate+"");
 
         Owner owner = ownerService.queryOwnerByName(username);
         Integer ownerId = owner.getId();
         Date timeFlag = clockinService.queryCountByOwnIdAndTime(ownerId);//数据库查到业主的日期
-        String timeFlag1=df.format(timeFlag);
+       if(timeFlag!=null){
+           String timeFlag1=df.format(timeFlag);
 
-        if (timeFlag1.equals(todayDate)){//若今天日期等于数据库中已经查到业主的时间，则说明已经打卡
-            return R.fail(400,"今日已打卡，请勿重复打卡");
-        }
+
+           if (timeFlag1.equals(todayDate)){//若今天日期等于数据库中已经查到业主的时间，则说明已经打卡
+               return R.fail(400,"今日已打卡，请勿重复打卡");
+           }
+       }
         //不相等，证明数据库还没有这个业主今日的打卡记录，正常打卡
         Integer houId = owner.getHouseId();
         House house = houseService.queryHouseById(houId);

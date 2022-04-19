@@ -2,10 +2,13 @@ package com.pk.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
+import com.pk.model.House;
 import com.pk.model.Owner;
 import com.pk.model.Userinfo;
+import com.pk.service.IHouseService;
 import com.pk.service.IOwnerService;
 import com.pk.service.IUserinfoService;
+import com.pk.service.impl.HouseServiceImpl;
 import com.pk.util.JsonObject;
 import com.pk.util.R;
 import io.swagger.annotations.Api;
@@ -34,6 +37,9 @@ public class OwnerController {
     private IOwnerService ownerService;
 
     @Resource
+    private IHouseService houseService;
+
+    @Resource
     private IUserinfoService userinfoService;
 
     @RequestMapping("/queryOwnerAll")
@@ -60,6 +66,7 @@ public class OwnerController {
         //md5加密
 //        String md5Password = DigestUtils.md5DigestAsHex("123456".getBytes());
         owner.setPassword("123456");//默认密码123456
+        House house= houseService.queryHouseById(owner.getHouseId());
         int num= ownerService.add(owner);
 
         //同步添加到用户信息

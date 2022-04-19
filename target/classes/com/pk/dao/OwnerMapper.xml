@@ -58,6 +58,8 @@
         select * from owner where id=#{id}
     </select>
 
+
+
     <delete id="deleteOwnerUserByUserName" parameterType="String">
         delete from owner where username=#{username2}
     </delete>

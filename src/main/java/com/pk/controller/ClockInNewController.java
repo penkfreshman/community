@@ -100,12 +100,15 @@ public class ClockInNewController {
          */
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-        String username=userinfo.getUsername();
+        String identity=userinfo.getIdentity();
+        Owner owner=ownerService.queryOwnerByIdCard(identity);
+       String username=owner.getUsername();
+        log.error(username);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
         String todayDate = df.format(new Date());//今天的日期
         //System.out.println(todayDate);
 
-        Owner owner = ownerService.queryOwnerByName(username);
+
         Integer ownerId = owner.getId();
 
         Date timeFlag = clockinnewService.queryCountByOwnId(ownerId);//数据库查到业主的最近一次打卡日期

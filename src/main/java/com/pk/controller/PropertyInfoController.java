@@ -85,7 +85,8 @@ public class PropertyInfoController {
     @RequestMapping("/initData")
     public R initData(@RequestBody PropertyInfo propertyInfo){
         //获取开始时间  结束时间  备注
-        List<House> list=houseService.findList();
+        List<House> list= houseService.findList();
+
         for(House house:list){
            //查询物业费收费的标准  建议 物业收费类型通过前台传值
             PropertyType type=propertyTypeService.findById(new Long(1));

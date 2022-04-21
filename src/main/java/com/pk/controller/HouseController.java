@@ -52,9 +52,9 @@ public class HouseController {
             list1.setBuilds(buiding.getNumbers());
             list1.setUnit(buiding.getUints());
 
-            log.error("-------------");
-            log.error((list1.getBuilds()!=null|| list1.getBuilds().trim()!="")?list1.getBuilds():"无");
-            log.error((list1.getUnit()!=null|| list1.getUnit().trim()!="")?list1.getUnit():"无");
+//            log.error("-------------");
+//            log.error((list1.getBuilds()!=null|| list1.getBuilds().trim()!="")?list1.getBuilds():"无");
+//            log.error((list1.getUnit()!=null|| list1.getUnit().trim()!="")?list1.getUnit():"无");
         }
         pageInfo.setList(list);
         return  new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
@@ -75,6 +75,20 @@ public class HouseController {
         }else{
             house.setStatus(0);
         }
+
+        String s=house.getNumbers()+buildingService.queryBuildById(house.getBuildingId()).getNumbers().trim();
+        log.error("新增房间编号: "+s);
+        List<House> list1=houseService.findList();
+
+        for (House list:list1){
+            Building buiding= buildingService.queryBuildById(list.getBuildingId());
+            log.error("-------------------房间编号:"+list.getNumbers().trim()+buiding.getNumbers());
+            String CodeTohome=list.getNumbers().trim()+buiding.getNumbers();
+            if (s.equals(CodeTohome)){
+                return R.fail("已有房间,请添加不同房间");
+            }
+        }
+
         int num= houseService.add(house);
         if(num>0){
             return R.ok();
@@ -103,6 +117,7 @@ public class HouseController {
         }else{
             house.setStatus(0);
         }
+
         int num= houseService.updateData(house);
         if(num>0){
             return R.ok();

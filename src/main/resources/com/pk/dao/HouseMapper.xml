@@ -28,7 +28,13 @@
         </where>
     </select>
 
+    <select id="findHouse" parameterType="string" resultType="com.pk.model.House">
+        select * from house
+    </select>
+
     <select id="queryHouseById" resultType="com.pk.model.House" parameterType="Integer">
         select * from house where id = #{houId}
     </select>
+
+
 </mapper>

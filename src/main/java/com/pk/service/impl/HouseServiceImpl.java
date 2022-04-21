@@ -36,7 +36,7 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
 
     @Override
     public List<House> findList() {
-        return baseMapper.selectList(null);
+        return houseDao.findHouse();
     }
 
     @Override

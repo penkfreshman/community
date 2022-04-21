@@ -138,7 +138,7 @@
                     layer.close(index);
                     var content = miniPage.getHrefContent('page/business/property/InitCharge.html');
 
-                    var index=openPage(content,"初始化物业费",'70%','70%');
+                    var index=openPage(content,"新增物业费",'70%','70%');
                 })
 
                 $(window).on("resize", function () {
@@ -209,6 +209,8 @@
                         rows[i].cells[1].innerHTML="￥";
                         rows[i].cells[2].innerHTML=data[k].money;
                         rows[i].cells[3].innerHTML="支付方式：现金";
+                        console.log("the n is"+n +"the k is "+k);
+                        console.log(JSON.stringify(data[k].endDate));
 
                         getmoney+=data[k].money;
                     }
@@ -221,10 +223,23 @@
                     document.getElementById('bigMoney').innerHTML=bigMoeny;
                     //渲染年月日
 
+
+                    // var date=data[k].endDate;
+                    // var fromDayStr =  new Date(Date.parse(date.replace(/-/g, "/")));
+                    // console.log(date.toString()+"  年"+fromDayStr.getFullYear()+"月"+fromDayStr.getMonth()+"日"+fromDayStr.getDay());
+                    //
+                    // document.getElementById("year").innerHTML=fromDayStr.getFullYear()+"";
+                    // document.getElementById("month").innerHTML=fromDayStr.getMonth()+1+"";
+                    // document.getElementById("day").innerHTML=fromDayStr.getDay()-2+"";
+
+
                     var date=new Date();
-                    document.getElementById("year").innerHTML=date.getFullYear();
-                    document.getElementById("month").innerHTML=date.getMonth();
-                    document.getElementById("day").innerHTML=date.getDay();
+                    console.log(JSON.stringify(date));
+                    console.log(date.toString());
+                    document.getElementById("year").innerHTML=date.getFullYear()+"";
+                    document.getElementById("month").innerHTML=date.getMonth()+1+"";
+                    document.getElementById("day").innerHTML=date.getDate()+"";
+
                 }
             }
             //获取金额

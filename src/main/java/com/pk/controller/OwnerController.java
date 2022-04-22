@@ -47,6 +47,11 @@ public class OwnerController {
                                     @RequestParam(defaultValue = "15") Integer limit,
                                     Owner owner){
         PageInfo<Owner> pageInfo= ownerService.findOwnerAll(page,limit,owner);
+//        for (Owner owner1: pageInfo.getList()){
+//            House house= houseService.queryHouseById(owner1.getHouseId());
+//            house.setIdentity(owner1.getIdentity());
+//            houseService.updateData(house);
+//        }
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
 
     }
@@ -56,6 +61,7 @@ public class OwnerController {
     @Transactional
     public List queryAll(){
         PageInfo<Owner> pageInfo= ownerService.findOwnerAll(1,100,null);
+
         return pageInfo.getList();
     }
 
@@ -67,6 +73,8 @@ public class OwnerController {
 //        String md5Password = DigestUtils.md5DigestAsHex("123456".getBytes());
         owner.setPassword("123456");//默认密码123456
         House house= houseService.queryHouseById(owner.getHouseId());
+        house.setIdentity(owner.getIdentity());
+        houseService.updateData(house);
         int num= ownerService.add(owner);
 
         //同步添加到用户信息

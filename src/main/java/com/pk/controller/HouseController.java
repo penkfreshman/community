@@ -1,24 +1,30 @@
 package com.pk.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import com.github.pagehelper.PageInfo;
 import com.pk.model.Building;
 import com.pk.model.House;
 import com.pk.service.IBuildingService;
 import com.pk.service.IHouseService;
+import com.pk.service.IOwnerService;
 import com.pk.util.JsonObject;
 import com.pk.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+
 
 /**
  * <p>
@@ -41,6 +47,9 @@ public class HouseController {
     @Resource
     private IBuildingService buildingService;
 
+    @Resource
+    private IOwnerService ownerService;
+
     @RequestMapping("/houseAll")
     public JsonObject queryHouseAll(String numbers,
                                   @RequestParam(defaultValue = "1")  Integer page,
@@ -48,6 +57,10 @@ public class HouseController {
         PageInfo<House> pageInfo=houseService.findHouseAll(page,limit,numbers);
         List<House> list=pageInfo.getList();
         for (House list1:list){
+            if (list1.getIdentity().trim().equals("")||list1.getIdentity().trim()==null){
+                list1.setStatus(0);
+                houseService.updateData(list1);}
+
             Building buiding= buildingService.queryBuildById(list1.getBuildingId());
             list1.setBuilds(buiding.getNumbers());
             list1.setUnit(buiding.getUints());
@@ -55,6 +68,8 @@ public class HouseController {
 //            log.error("-------------");
 //            log.error((list1.getBuilds()!=null|| list1.getBuilds().trim()!="")?list1.getBuilds():"无");
 //            log.error((list1.getUnit()!=null|| list1.getUnit().trim()!="")?list1.getUnit():"无");
+
+
         }
         pageInfo.setList(list);
         return  new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
@@ -62,23 +77,35 @@ public class HouseController {
 
     @RequestMapping("/queryAll")
     public  List<House> queryAll(){
-        PageInfo<House> pageInfo=houseService.findHouseAll(1,100,null);
-        return pageInfo.getList();
+
+        List<House> houses=houseService.findList();
+        Iterator<House> iterator = houses.iterator();
+        while (iterator.hasNext()){
+            House house=iterator.next();
+            if (house.getStatus()==0) {
+                iterator.remove();
+                log.error(house+"");
+            }
+        }
+        return houses;
     }
 
 
     @ApiOperation(value = "新增")
     @RequestMapping("/add")
     public R add(@RequestBody House house){
-        if(house.getIntoDate()!=null){
-            house.setStatus(1);
-        }else{
-            house.setStatus(0);
-        }
+//        if(house.getIntoDate()!=null){
+//            house.setStatus(1);
+//        }else{
+//            house.setStatus(0);
+//        }
 
         String s=house.getNumbers()+buildingService.queryBuildById(house.getBuildingId()).getNumbers().trim();
-        log.error("新增房间编号: "+s);
+//        log.error("新增房间编号: "+s);
         List<House> list1=houseService.findList();
+
+        if(ownerService.queryOwnerByIdCard(house.getIdentity().trim())==null)
+            return R.fail("未知身份证号码");
 
         for (House list:list1){
             Building buiding= buildingService.queryBuildById(list.getBuildingId());
@@ -112,11 +139,11 @@ public class HouseController {
     @ApiOperation(value = "更新")
     @RequestMapping("/update")
     public R update(@RequestBody House house){
-        if(house.getIntoDate()!=null){
-            house.setStatus(1);
-        }else{
-            house.setStatus(0);
-        }
+//        if(house.getIntoDate()!=null){
+//            house.setStatus(1);
+//        }else{
+//            house.setStatus(0);
+//        }
 
         int num= houseService.updateData(house);
         if(num>0){

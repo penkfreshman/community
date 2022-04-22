@@ -17,7 +17,7 @@ import java.util.Date;
  * </p>
  *
  * @author pk
- * @since 2020-11-08
+ * @since 2021-11-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -45,8 +45,10 @@ public class House implements Serializable {
 
     private Double area;
 
-    private String unit;
+    private transient String unit;
 
-    private String builds;
+    private transient String builds;
+
+    private String identity;
 
 }

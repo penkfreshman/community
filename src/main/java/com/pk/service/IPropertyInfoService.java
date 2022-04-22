@@ -14,7 +14,7 @@ import java.util.Date;
  * </p>
  *
  * @author pk
- * @since 2020-11-08
+ * @since 2021-11-08
  */
 public interface IPropertyInfoService extends IService<PropertyInfo> {
 

@@ -1,6 +1,7 @@
 package com.pk.util;
 
 import lombok.Data;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 
@@ -52,4 +53,6 @@ public class JsonObject<T> {
     public void setData(List<T> data) {
         this.data = data;
     }
+
+
 }

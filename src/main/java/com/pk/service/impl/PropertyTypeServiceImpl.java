@@ -17,7 +17,7 @@ import java.util.List;
  * </p>
  *
  * @author pk
- * @since 2020-11-08
+ * @since 2021-11-08
  */
 @Service
 public class PropertyTypeServiceImpl extends ServiceImpl<PropertyTypeMapper, PropertyType> implements IPropertyTypeService {

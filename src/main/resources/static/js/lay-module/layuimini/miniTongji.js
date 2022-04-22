@@ -1,5 +1,5 @@
 /**
- * date:2020/03/01
+ * date:2021/03/01
  * author:Mr.Chung
  * version:2.0
  * description:layuimini 统计框架扩展

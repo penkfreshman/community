@@ -105,12 +105,14 @@ public class CarchargeController {
         /**
          * 遍历所有得已在使用得车位信息
          */
+
         List<Parking> parkingList=parkingService.queryParkingByStatus();
         for(Parking park:parkingList){
             carcharge.setStatus(0);
             carcharge.setOwnerId(park.getOwnerId());
             carcharge.setType("停车费");
             carcharge.setParkId(park.getId());
+            log.error(carcharge+"");
             carchargeService.add(carcharge);
         }
        return R.ok();

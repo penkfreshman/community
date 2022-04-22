@@ -60,6 +60,11 @@ public class HouseController {
             if (list1.getIdentity().trim().equals("")||list1.getIdentity().trim()==null){
                 list1.setStatus(0);
                 houseService.updateData(list1);}
+            else {
+                list1.setStatus(1);
+                houseService.updateData(list1);
+            }
+
 
             Building buiding= buildingService.queryBuildById(list1.getBuildingId());
             list1.setBuilds(buiding.getNumbers());
@@ -104,8 +109,9 @@ public class HouseController {
 //        log.error("新增房间编号: "+s);
         List<House> list1=houseService.findList();
 
-        if(ownerService.queryOwnerByIdCard(house.getIdentity().trim())==null)
+        if(ownerService.queryOwnerByIdCard(house.getIdentity().trim())==null&&house.getIdentity()!=null&&house.getIdentity()!="")
             return R.fail("未知身份证号码");
+
 
         for (House list:list1){
             Building buiding= buildingService.queryBuildById(list.getBuildingId());
@@ -144,6 +150,8 @@ public class HouseController {
 //        }else{
 //            house.setStatus(0);
 //        }
+        if(ownerService.queryOwnerByIdCard(house.getIdentity().trim())==null&&house.getIdentity()!=null&&house.getIdentity()!="")
+            return R.fail("未知身份证号码");
 
         int num= houseService.updateData(house);
         if(num>0){

@@ -71,4 +71,10 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     public House queryHouseById(Integer houId) {
         return houseDao.queryHouseById(houId);
     }
+
+    @Override
+    public List<House> findHouseList() {
+
+        return houseDao.findHouseByStatus();
+    }
 }

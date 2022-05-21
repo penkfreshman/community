@@ -77,7 +77,7 @@ public class RecordsController {
              2、添加物业收费信息
                 2.1  获取 上次到这次之间的度数信息
                 2.2 根据收费类型查询收费标准
-                2.3 用1的度数×2的的收费标准 获取相关费用
+                2.3 用1的度数×2的收费标准 获取相关费用
                 2.4  并设定为未缴费状态
                 2.5 添加工作
          */
@@ -87,7 +87,11 @@ public class RecordsController {
         Integer typeId=records.getTypeId();
         //获取最后一次记录信息
         Records rec=recordsService.queryByHouIdAndTypeId(houId,typeId);
+
         if(rec!=null){
+            if(records.getOnTime().before(rec.getOnTime()))
+                return R.fail("请输入后续时间，否则请删除当前记录重新操作");
+            log.error(rec.getCheckTime().toString());
             //获取上次表的度数  上次抄表时间
             records.setUpTime(rec.getOnTime());
             records.setNum(rec.getNum2());
@@ -98,6 +102,7 @@ public class RecordsController {
 
           //添加记录信息到数据库
           records.setCheckTime(new Date());
+
           recordsService.add(records);
 
           //2 添加费用信息

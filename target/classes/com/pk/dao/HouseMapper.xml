@@ -36,5 +36,9 @@
         select * from house where id = #{houId}
     </select>
 
+    <select id="findHouseByStatus" resultType="com.pk.model.House">
+        select * from house where status = 0
+    </select>
+
 
 </mapper>

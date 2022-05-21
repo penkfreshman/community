@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -105,8 +108,18 @@ public class CarchargeController {
         /**
          * 遍历所有得已在使用得车位信息
          */
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        try {
+            date = simpleDateFormat.parse(carcharge.getEndDate());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         List<Parking> parkingList=parkingService.queryParkingByStatus();
+        if(carcharge.getPayDate().after(date))
+            return R.fail("请输入正确的时间");
         for(Parking park:parkingList){
             carcharge.setStatus(0);
             carcharge.setOwnerId(park.getOwnerId());

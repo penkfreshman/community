@@ -71,8 +71,13 @@ public class OwnerController {
     public R add(@RequestBody Owner owner){
         //md5加密
 //        String md5Password = DigestUtils.md5DigestAsHex("123456".getBytes());
+        log.error(owner.toString());
         owner.setPassword("123456");//默认密码123456
         House house= houseService.queryHouseById(owner.getHouseId());
+        log.error("-------------------------------"+house.toString());
+        if(house.getStatus()==1)
+           return R.fail("房间已入住，请输入正确的住户房间，或先进行房间登记");
+
         house.setIdentity(owner.getIdentity());
         houseService.updateData(house);
         int num= ownerService.add(owner);

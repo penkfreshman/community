@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -57,7 +58,7 @@ public class HouseController {
         PageInfo<House> pageInfo=houseService.findHouseAll(page,limit,numbers);
         List<House> list=pageInfo.getList();
         for (House list1:list){
-            if (list1.getIdentity().trim().equals("")||list1.getIdentity().trim()==null){
+            if (list1.getIdentity().trim().equals("")||list1.getIdentity().trim()==null||list1.getIdentity().startsWith("无")){
                 list1.setStatus(0);
                 houseService.updateData(list1);}
             else {
@@ -96,6 +97,15 @@ public class HouseController {
     }
 
 
+    @RequestMapping("/queryByStatus")
+    public  List<House> queryByStatus(){
+
+        List<House> houses=houseService.findHouseList();
+        log.error("------------"+houses.toString());
+        return houses;
+    }
+
+
     @ApiOperation(value = "新增")
     @RequestMapping("/add")
     public R add(@RequestBody House house){
@@ -111,6 +121,8 @@ public class HouseController {
 
         if(ownerService.queryOwnerByIdCard(house.getIdentity().trim())==null&&house.getIdentity()!=null&&house.getIdentity()!="")
             return R.fail("未知身份证号码");
+        if (house.getIdentity()!=null||house.getIdentity()!="")
+            house.setIdentity("无"+new Random().nextInt(1000));
 
 
         for (House list:list1){

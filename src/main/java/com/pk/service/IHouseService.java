@@ -24,6 +24,8 @@ public interface IHouseService extends IService<House> {
 
     List<House> findList();
 
+    List<House> findHouseList();
+
     /**
      * 查询分页数据
      *
@@ -66,4 +68,6 @@ public interface IHouseService extends IService<House> {
     House findById(Long id);
 
     House queryHouseById(Integer houId);
+
+
 }

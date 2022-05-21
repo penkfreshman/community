@@ -22,7 +22,7 @@
     </select>
 
     <select id="queryByHouIdAndTypeId" parameterType="int" resultType="com.pk.model.Records">
-          select * from records where house_id=#{houId} and type_id=#{typeId} order by id desc
+          select * from records r where house_id=#{houId} and type_id=#{typeId} order by r.on_time desc
           limit 1
     </select>
 

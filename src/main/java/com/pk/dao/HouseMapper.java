@@ -21,6 +21,12 @@ public interface HouseMapper extends BaseMapper<House> {
     List<House> findHouse( );
 
     /**
+     * 前端加载列表时，指定未入住房间进行添加
+     * @return
+     */
+    List<House> findHouseByStatus();
+
+    /**
      * 通过owner中house_id查找house
      */
     House queryHouseById(@Param("houId") Integer houId);
